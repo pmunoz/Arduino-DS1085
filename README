@@ -10,6 +10,6 @@ synthesizer using the Arduino Wire library.
 
 1) INSTALLATION
 ========================================================================
-Extract the library file in the "libraries/" directory 
+Extract the library file in the "libraries" directory 
 of your arduino installation
 
