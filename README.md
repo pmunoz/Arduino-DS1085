@@ -7,5 +7,5 @@
 
 This Arduino library makes it easier to communicate with DS1085 frequency synthesizer using the Arduino Wire library.
 
-## INSTALATION
+## INSTALLATION
 Extract the library file in the "libraries" directory of your arduino installation and you are ready to go!
