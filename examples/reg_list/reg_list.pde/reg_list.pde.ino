@@ -1,4 +1,3 @@
-#include <Wire.h>
 #include <DS1085.h>
 
 DS1085 fSynth(0xB0);

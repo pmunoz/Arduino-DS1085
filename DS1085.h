@@ -18,55 +18,56 @@
 
 #ifndef	ds1085_h
 #define ds1085_h
-	#include <WProgram.h>
-	#include <Wire.h>
 
-	/*
-	 *  DS1085 commands set
-	 */
-	#define  AccDAC      0x08
-	#define  AccOFFSET   0x0E
-	#define  AccDIV      0x01
-	#define  AccMUX      0x02
-	#define  AccADDR     0x0D
-	#define  AccRANGE    0x37
-	#define  WriteE2     0x3F
+#include <Arduino.h>
+#include <Wire.h>
 
-	class DS1085
-		{
-		public:
-			DS1085(int address);
-			void begin();
-			int getDAC();		
-			int getOFFSET();
-			int get_Relative_OFFSET();
-			int getDIV();
-			int getADDR();
-			int getMUX();
-			int getDIV1();
-			int getPS0();
-			int getPS1();
-			//int getModeOUT0();
-			//int getModeOUT1();
-			int getRANGE();
-			
-			void setDAC(int val);
-			void setOFFSET(int offset);
-			void set_Relative_OFFSET(int dif);
-			void setDIV(int val);
-			void setADDR(boolean WC, int addr); 
-			void setMUX(int val);
-			void setDIV1(boolean div1);
-			void setPS0(int ps0);
-			void setPS1(int ps1);
-			//void setModeOUT0(int val);
-			//void setModeOUT1(int val);
+/*
+*  DS1085 commands set
+*/
+#define  AccDAC      0x08
+#define  AccOFFSET   0x0E
+#define  AccDIV      0x01
+#define  AccMUX      0x02
+#define  AccADDR     0x0D
+#define  AccRANGE    0x37
+#define  WriteE2     0x3F
+
+class DS1085
+	{
+	public:
+		DS1085(int address);
+		void begin();
+		int getDAC();		
+		int getOFFSET();
+		int get_Relative_OFFSET();
+		int getDIV();
+		int getADDR();
+		int getMUX();
+		int getDIV1();
+		int getPS0();
+		int getPS1();
+		//int getModeOUT0();
+		//int getModeOUT1();
+		int getRANGE();
+		
+		void setDAC(int val);
+		void setOFFSET(int offset);
+		void set_Relative_OFFSET(int dif);
+		void setDIV(int val);
+		void setADDR(boolean WC, int addr); 
+		void setMUX(int val);
+		void setDIV1(boolean div1);
+		void setPS0(int ps0);
+		void setPS1(int ps1);
+		//void setModeOUT0(int val);
+		//void setModeOUT1(int val);
 	
-			void writeE2();
+		void writeE2();
 	
-		private:
-			int _DEF_OFFSET;
-			int _address;
+	private:
+		int _DEF_OFFSET;
+		int _address;
 			
-	};
+};
 #endif

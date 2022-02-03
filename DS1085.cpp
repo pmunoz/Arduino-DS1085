@@ -16,10 +16,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "WProgram.h"
 #include "DS1085.h"
-
-
 
 
 DS1085::DS1085(int address)
@@ -41,8 +38,8 @@ void DS1085::begin(){
  */
 int DS1085::getDAC(){
 	int result = 0;
-	Wire.beginTransmission(_address); Wire.send(AccDAC); 		Wire.endTransmission();
-  	Wire.requestFrom(_address,2); int byte1 = 		Wire.receive(); int byte2 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccDAC); 		Wire.endTransmission();
+  	Wire.requestFrom(_address,2); int byte1 = 		Wire.read(); int byte2 = Wire.read();
 	result = (byte1 << 2) | (byte2 >> 6);
 	return result;
 }
@@ -54,7 +51,7 @@ void DS1085::setDAC(int val){
 	byte byte1 = val >> 2;
 	byte byte2 = (0b11 & val) << 6;  
 	byte data[] =  {byte1,byte2};  
-	Wire.beginTransmission(_address); Wire.send(AccDAC); 		Wire.send(data,2); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(AccDAC); 		Wire.write(data,2); Wire.endTransmission();
 }
 
 //---------------------------------------------------------------------------------------------
@@ -63,8 +60,8 @@ void DS1085::setDAC(int val){
  * Gets the OFFSET register value 
  */
 int DS1085::getOFFSET(){
-	Wire.beginTransmission(_address); Wire.send(AccOFFSET); Wire.endTransmission();
-	Wire.requestFrom(_address,1); int byte1 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccOFFSET); Wire.endTransmission();
+	Wire.requestFrom(_address,1); int byte1 = Wire.read();
 	int val = (0x1F) & byte1;
 	return val;
 }
@@ -74,7 +71,7 @@ int DS1085::getOFFSET(){
  */
 void DS1085::setOFFSET(int offset){
 	byte byte1 = (byte) 0x1F & offset;
-	Wire.beginTransmission(_address); Wire.send(AccOFFSET); Wire.send(byte1); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(AccOFFSET); Wire.write(byte1); Wire.endTransmission();
 }
 
 
@@ -95,8 +92,8 @@ void DS1085::set_Relative_OFFSET(int dif){
  */
 int DS1085::getDIV(){
 	int result = 0;
-	Wire.beginTransmission(_address); Wire.send(AccDIV); Wire.endTransmission();
-	Wire.requestFrom(_address,2); int byte1 = Wire.receive(); int byte2 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccDIV); Wire.endTransmission();
+	Wire.requestFrom(_address,2); int byte1 = Wire.read(); int byte2 = Wire.read();
 	result = (byte1 << 2) | (byte2 >> 6);
 	return result;
 }
@@ -108,7 +105,7 @@ void DS1085::setDIV(int val){
 	byte byte1 = val >> 2;
 	byte byte2 = (0b11 & val) << 6;  
 	byte data[] =  {byte1,byte2};  
-	Wire.beginTransmission(_address); Wire.send(AccDIV); Wire.send(data,2); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(AccDIV); Wire.write(data,2); Wire.endTransmission();
 }
 
 //---------------------------------------------------------------------------------------------
@@ -119,8 +116,8 @@ void DS1085::setDIV(int val){
  */
 int DS1085::getADDR(){
 	int result = 0;
-	Wire.beginTransmission(_address); Wire.send(AccADDR); Wire.endTransmission();
-	Wire.requestFrom(_address,1); int byte1 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccADDR); Wire.endTransmission();
+	Wire.requestFrom(_address,1); int byte1 = Wire.read();
 	result = (0x0F) & (byte1);
 	return result;
 }
@@ -136,7 +133,7 @@ void DS1085::setADDR(boolean WC, int addr){
 	else{
 		val = (0b0111) & val;  
 	}
-	Wire.beginTransmission(_address); Wire.send(AccADDR); Wire.send(val); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(AccADDR); Wire.write(val); Wire.endTransmission();
 }
 
 //---------------------------------------------------------------------------------------------
@@ -145,7 +142,7 @@ void DS1085::setADDR(boolean WC, int addr){
  * Writes configuration to the EEPROM memory
  */
 void DS1085::writeE2(){
-	Wire.beginTransmission(_address); Wire.send(WriteE2); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(WriteE2); Wire.endTransmission();
 }
 
 //---------------------------------------------------------------------------------------------
@@ -156,8 +153,8 @@ void DS1085::writeE2(){
  */
 int DS1085::getMUX(){
 	int result = 0;
-	Wire.beginTransmission(_address); Wire.send(AccMUX); Wire.endTransmission();
-	Wire.requestFrom(_address,2); int byte1 = Wire.receive(); int byte2 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccMUX); Wire.endTransmission();
+	Wire.requestFrom(_address,2); int byte1 = Wire.read(); int byte2 = Wire.read();
 	result = (byte1 << 2) | (byte2 >> 6);
 	return result;
 }
@@ -169,7 +166,7 @@ void DS1085::setMUX(int val){
 	byte byte1 = val >> 2;
 	byte byte2 = (0b11 & val) << 6;  
 	byte data[] =  {byte1,byte2};  
-	Wire.beginTransmission(_address); Wire.send(AccMUX); Wire.send(data,2); Wire.endTransmission();
+	Wire.beginTransmission(_address); Wire.write(AccMUX); Wire.write(data,2); Wire.endTransmission();
 }
 
 int DS1085::getDIV1(){
@@ -258,8 +255,8 @@ int getModeOUT1(){
  */
 int DS1085::getRANGE(){
 	int result = 0;
-	Wire.beginTransmission(_address); Wire.send(AccRANGE); Wire.endTransmission();
-	Wire.requestFrom(_address,2); int byte1 = Wire.receive(); int byte2 = Wire.receive();
+	Wire.beginTransmission(_address); Wire.write(AccRANGE); Wire.endTransmission();
+	Wire.requestFrom(_address,2); int byte1 = Wire.read(); int byte2 = Wire.read();
 	result = (byte1 >> 3);
 	return result;
 }
